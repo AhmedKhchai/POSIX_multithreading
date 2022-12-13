@@ -15,22 +15,23 @@ void *handler(void *arg) {
   }
 
 }
-void *limiteThreadCpu(pthread_t* thread){
+pthread_t *limiteThreadCpu(pthread_t* thread){
     cpu_set_t cpuset;
     thread = pthread_self();
     CPU_ZERO(&cpuset);
 	CPU_SET(1, &cpuset);
 	pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
+	return thread;
 }
 int main() {
   pthread_t tOne;
   pthread_t tTwo;
   pthread_t tThree;
   pthread_t tFour;
-  limiteThreadCpu(tOne);
-  limiteThreadCpu(tTwo);
-  limiteThreadCpu(tThree);
-  limiteThreadCpu(tFour);
+  tOne = limiteThreadCpu(tOne);
+  tTwo = limiteThreadCpu(tTwo);
+  tThree = limiteThreadCpu(tThree);
+  tFour = limiteThreadCpu(tFour);
 
   pthread_attr_t attr;
   pthread_attr_init (&attr);
@@ -61,9 +62,9 @@ int main() {
     perror("pthread_create() error");
     exit(1);
   };
-  int pthread_join(pthread_t tOne, void **retval);
-  int pthread_join(pthread_t tTwo, void **retval);
-  int pthread_join(pthread_t tThree, void **retval);
-  int pthread_join(pthread_t tFour, void **retval);
+  int pthread_join(tOne, null);
+  int pthread_join(tTwo, null);
+  int pthread_join(tThree, null);
+  int pthread_join(tFour, null);
   return 0;
 }
