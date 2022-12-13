@@ -62,9 +62,10 @@ int main() {
     perror("pthread_create() error");
     exit(1);
   };
-  int pthread_join(tOne, null);
-  int pthread_join(tTwo, null);
-  int pthread_join(tThree, null);
-  int pthread_join(tFour, null);
+  int * pInt = NULL;
+  int pthread_join(tOne, pInt);
+  int pthread_join(tTwo, pInt);
+  int pthread_join(tThree, pInt);
+  int pthread_join(tFour, pInt);
   return 0;
 }
